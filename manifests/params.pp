@@ -1,12 +1,13 @@
 class letsencrypt::params {
 
-  $package_name='letsencrypt'
+  $package_name='certbot'
   $service_name='letsencrypt'
 
   case $::osfamily
   {
     'redhat':
     {
+      $include_epel = true
       case $::operatingsystemrelease
       {
         /^[5-7].*$/:
@@ -17,6 +18,7 @@ class letsencrypt::params {
     }
     'Debian':
     {
+      $include_epel = false
       case $::operatingsystem
       {
         'Ubuntu':
