@@ -17,12 +17,11 @@ class letsencrypt::install inherits letsencrypt {
 
     package { $letsencrypt::params::package_name:
       ensure => $letsencrypt::package_ensure,
-      notify => Exec['init letsencrypt'],
     }
 
     exec { 'init letsencrypt':
-      command     => "certbot -h",
-      refreshonly => true,
+      command => "certbot -h",
+      creates => '/etc/letsencrypt/renewal-hooks',
     }
   }
 

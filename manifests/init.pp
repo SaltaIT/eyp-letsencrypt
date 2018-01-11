@@ -26,6 +26,8 @@ class letsencrypt(
                     $email               = undef,
                     $agree_tos           = false,
                     $unsafe_registration = false,
+                    $rsakeysize          = '4096',
+                    $autorenew           = true,
                   ) inherits letsencrypt::params {
 
   validate_re($package_ensure, [ '^present$', '^installed$', '^absent$', '^purged$', '^held$', '^latest$' ], 'Not a supported package_ensure: present/absent/purged/held/latest')
