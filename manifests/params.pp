@@ -1,7 +1,7 @@
 class letsencrypt::params {
 
   $package_name='certbot'
-  $service_name='letsencrypt'
+  $service_name='certbot-renew.timer'
 
   case $::osfamily
   {
