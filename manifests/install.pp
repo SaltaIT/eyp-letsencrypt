@@ -1,5 +1,9 @@
 class letsencrypt::install inherits letsencrypt {
 
+  Exec {
+    path => '/usr/sbin:/usr/bin:/sbin:/bin',
+  }
+
   if($letsencrypt::manage_package)
   {
     if($fping::params::include_epel)
@@ -13,6 +17,12 @@ class letsencrypt::install inherits letsencrypt {
 
     package { $letsencrypt::params::package_name:
       ensure => $letsencrypt::package_ensure,
+      notify => Exec['init letsencrypt'],
+    }
+
+    exec { 'init letsencrypt':
+      command     => "certbot -h",
+      refreshonly => true,
     }
   }
 
