@@ -1,0 +1,8 @@
+rsa-key-size = <%= @rsakeysize %>
+<% if defined?(@email) -%>
+email = <%= @email %>
+<% else -%>
+register-unsafely-without-email
+<% end -%>
+agree-tos = <%= @agree_tos %>
+renew-by-default = <%= @autorenew %>
