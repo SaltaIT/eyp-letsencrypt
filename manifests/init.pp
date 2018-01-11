@@ -21,6 +21,10 @@
 #   --domains "example.com, www.example.com"
 
 class letsencrypt(
+                    $manage_service        = true,
+                    $manage_docker_service = true,
+                    $service_ensure        = 'running',
+                    $service_enable        = true,
                     $manage_package        = true,
                     $package_ensure        = 'installed',
                     $email                 = undef,
@@ -28,10 +32,7 @@ class letsencrypt(
                     $unsafe_registration   = false,
                     $rsakeysize            = '4096',
                     $autorenew             = true,
-                    $manage_service        = true,
-                    $manage_docker_service = true,
-                    $service_ensure        = 'running',
-                    $service_enable        = true,
+                    $webroot               = '/var/lib/letsencrypt',
                   ) inherits letsencrypt::params {
 
   validate_re($package_ensure, [ '^present$', '^installed$', '^absent$', '^purged$', '^held$', '^latest$' ], 'Not a supported package_ensure: present/absent/purged/held/latest')
