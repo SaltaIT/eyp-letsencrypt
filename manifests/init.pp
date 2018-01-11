@@ -21,11 +21,27 @@
 #   --domains "example.com, www.example.com"
 
 class letsencrypt(
-                    $manage_package = true,
-                    $package_ensure = 'installed',
-                  ) inherits letsencrypt::params{
+                    $manage_package      = true,
+                    $package_ensure      = 'installed',
+                    $email               = undef,
+                    $agree_tos           = false,
+                    $unsafe_registration = false,
+                  ) inherits letsencrypt::params {
 
   validate_re($package_ensure, [ '^present$', '^installed$', '^absent$', '^purged$', '^held$', '^latest$' ], 'Not a supported package_ensure: present/absent/purged/held/latest')
+
+  if(!$agree_tos)
+  {
+    fail('You must agree TOS to be able to proceed (ie set agree_tos to true)')
+  }
+
+  if($email==undef)
+  {
+    if(!$unsafe_registration)
+    {
+      fail('You cannot proceed without setting an email unless you set unsafe_registration to true')
+    }
+  }
 
   class { '::letsencrypt::install': }
   -> class { '::letsencrypt::config': }
