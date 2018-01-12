@@ -3,7 +3,7 @@
 # chain = /etc/letsencrypt/live/example.com/chain.pem
 # fullchain = /etc/letsencrypt/live/example.com/fullchain.pem
 define letsencrypt::certificate (
-                                  $domains = [],
+                                  $domains = [ $name ],
                                 ) {
   #
   $cert_file = inline_template('/etc/letsencrypt/live/<%= @domains.first %>/cert.pem')

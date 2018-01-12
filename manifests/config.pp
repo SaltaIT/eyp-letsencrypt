@@ -7,6 +7,14 @@ class letsencrypt::config inherits letsencrypt {
     mode   => '0755',
   }
 
+  file { '/etc/letsencrypt/renew':
+    ensure  => 'directory',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => File['/etc/letsencrypt'],
+  }
+
   # /etc/letsencrypt/cli.ini
   file { '/etc/letsencrypt/cli.ini':
     ensure  => 'present',
