@@ -6,12 +6,23 @@ class letsencrypt::install inherits letsencrypt {
 
   if($letsencrypt::manage_package)
   {
-    if($fping::params::include_epel)
+    if($letsencrypt::params::include_epel)
     {
       include ::epel
 
-      Package[$fping::params::package_name] {
+      Package[$letsencrypt::params::package_name] {
         require => Class['::epel'],
+      }
+    }
+
+    if($letsencrypt::params::ppa_certbot!=undef)
+    {
+      apt::ppa { $letsencrypt::params::ppa_certbot:
+        ensure => 'present',
+      }
+
+      Package[$letsencrypt::params::package_name] {
+        require => Apt::Ppa[$letsencrypt::params::ppa_certbot],
       }
     }
 
