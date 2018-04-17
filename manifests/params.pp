@@ -8,6 +8,7 @@ class letsencrypt::params {
     'redhat':
     {
       $include_epel = true
+      $ppa_certbot = undef
       case $::operatingsystemrelease
       {
         /^[5-7].*$/:
@@ -19,6 +20,7 @@ class letsencrypt::params {
     'Debian':
     {
       $include_epel = false
+      $ppa_certbot = 'ppa:certbot/certbot'
       case $::operatingsystem
       {
         'Ubuntu':
