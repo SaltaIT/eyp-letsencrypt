@@ -9,7 +9,6 @@ define letsencrypt::certificate (
   $cert_file = inline_template('/etc/letsencrypt/live/<%= @domains.first %>/cert.pem')
   $conf_file = inline_template('/etc/letsencrypt/renew/<%= @domains.first %>.conf')
 
-
   file { $conf_file:
     ensure  => 'present',
     owner   => 'root',
