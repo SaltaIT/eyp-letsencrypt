@@ -1,1 +1,11 @@
 domains = <%= @domains.join(',') %>
+
+cert = <%= @cert_file %>
+privkey = <%= @privkey_file %>
+chain = <%= @chain_file %>
+fullchain = <%= @fullchain_file %>
+archive_dir = <%= @archive_dir %>
+
+<% if defined?(@renew_hook) -%>
+renew_hook = <%= @renew_hook %>
+<% end -%>

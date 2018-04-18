@@ -4,11 +4,17 @@
 # fullchain = /etc/letsencrypt/live/example.com/fullchain.pem
 define letsencrypt::certificate (
                                   $domains = [ $name ],
+                                  $renew_hook = undef,
+
                                 ) {
   #
+  $conf_file = inline_template('/etc/letsencrypt/renewal/<%= @domains.first %>.conf')
   $cert_file = inline_template('/etc/letsencrypt/live/<%= @domains.first %>/cert.pem')
-  $conf_file = inline_template('/etc/letsencrypt/renew/<%= @domains.first %>.conf')
-
+  $privkey_file = inline_template('/etc/letsencrypt/live/<%= @domains.first %>/privkey.pem')
+  $chain_file = inline_template('/etc/letsencrypt/live/<%= @domains.first %>/chain.pem')
+  $fullchain_file = inline_template('/etc/letsencrypt/live/<%= @domains.first %>/fullchain.pem')
+  $archive_dir = inline_template('/etc/letsencrypt/archive/<%= @domains.first %>')
+  
   file { $conf_file:
     ensure  => 'present',
     owner   => 'root',

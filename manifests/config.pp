@@ -1,5 +1,12 @@
 class letsencrypt::config inherits letsencrypt {
 
+  file { '/var/lib/letsencrypt':
+    ensure => 'directory',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
+
   file { '/etc/letsencrypt':
     ensure => 'directory',
     owner  => 'root',
@@ -7,7 +14,7 @@ class letsencrypt::config inherits letsencrypt {
     mode   => '0755',
   }
 
-  file { '/etc/letsencrypt/renew':
+  file { '/etc/letsencrypt/renewal':
     ensure  => 'directory',
     owner   => 'root',
     group   => 'root',
