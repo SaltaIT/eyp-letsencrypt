@@ -22,6 +22,14 @@ class letsencrypt::config inherits letsencrypt {
     require => File['/etc/letsencrypt'],
   }
 
+  file { '/etc/letsencrypt/live':
+    ensure  => 'directory',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => File['/etc/letsencrypt'],
+  }
+
   # /etc/letsencrypt/cli.ini
   file { '/etc/letsencrypt/cli.ini':
     ensure  => 'present',
