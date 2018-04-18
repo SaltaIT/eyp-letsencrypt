@@ -1,7 +1,6 @@
 class letsencrypt::params {
 
   $package_name='certbot'
-  $service_name='certbot-renew.timer'
 
   case $::osfamily
   {
@@ -9,6 +8,7 @@ class letsencrypt::params {
     {
       $include_epel = true
       $ppa_certbot = undef
+      $service_name='certbot-renew.timer'
       case $::operatingsystemrelease
       {
         /^[5-7].*$/:
@@ -21,6 +21,7 @@ class letsencrypt::params {
     {
       $include_epel = false
       $ppa_certbot = 'ppa:certbot/certbot'
+      $service_name='certbot.timer'
       case $::operatingsystem
       {
         'Ubuntu':
