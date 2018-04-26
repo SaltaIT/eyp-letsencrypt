@@ -8,7 +8,10 @@ describe 'letsencrypt class' do
     it 'should work with no errors' do
       pp = <<-EOF
 
-      class { 'letsencrypt': }
+      class { 'letsencrypt':
+        agree_tos           => true,
+        unsafe_registration => true,
+      }
 
       EOF
 
