@@ -31,7 +31,7 @@ class letsencrypt::install inherits letsencrypt {
     }
 
     exec { 'init letsencrypt':
-      command => "certbot -h",
+      command => 'certbot -h',
       creates => '/etc/letsencrypt/renewal-hooks',
       require => Package[$letsencrypt::params::package_name],
     }
