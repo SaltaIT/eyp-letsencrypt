@@ -1,11 +1,14 @@
-domains = <%= @domains.join(',') %>
-
+renew_before_expiry = <%= @renew_before_expiry_days %> days
+#version = 0.31.0 # certbot automation --version | awk '{ print $NF }'
+archive_dir = <%= @archive_dir %>
 cert = <%= @cert_file %>
 privkey = <%= @privkey_file %>
 chain = <%= @chain_file %>
 fullchain = <%= @fullchain_file %>
-archive_dir = <%= @archive_dir %>
 
-<% if defined?(@renew_hook) -%>
-renew_hook = <%= @renew_hook %>
-<% end -%>
+# Options used in the renewal process
+[renewalparams]
+#account = 
+rsa_key_size = <%= @rsa_key_size %>
+authenticator = webroot
+server = https://acme-v02.api.letsencrypt.org/directory
