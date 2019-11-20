@@ -20,12 +20,12 @@ class letsencrypt::params {
     'Debian':
     {
       $include_epel = false
-      $ppa_certbot = 'ppa:certbot/certbot'
       $service_name='certbot.timer'
       case $::operatingsystem
       {
         'Ubuntu':
         {
+          $ppa_certbot = 'ppa:certbot/certbot'
           case $::operatingsystemrelease
           {
             /^14.*$/:
@@ -37,7 +37,17 @@ class letsencrypt::params {
             default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
           }
         }
-        'Debian': { fail('Unsupported')  }
+        'Debian':
+        {
+          $ppa_certbot = undef
+          case $::operatingsystemrelease
+          {
+            /^10.*$/:
+            {
+            }
+            default: { fail("Unsupported Debian version! - ${::operatingsystemrelease}")  }
+          }
+        }
         default: { fail('Unsupported Debian flavour!')  }
       }
     }
