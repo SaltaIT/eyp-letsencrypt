@@ -5,7 +5,6 @@
 define letsencrypt::certificate (
                                   $domains = [ $name ],
                                   $renew_hook = undef,
-
                                 ) {
   #
   $conf_file = inline_template('/etc/letsencrypt/renewal/<%= @domains.first %>.conf')
