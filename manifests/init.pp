@@ -1,25 +1,3 @@
-# # Use this command if a webserver is already running with the webroot
-# # at /var/www/html.
-# certbot-auto certonly \
-#   --agree-tos \
-#   --non-interactive \
-#   --text \
-#   --rsa-key-size 4096 \
-#   --email admin@example.com \
-#   --webroot-path /var/www/html \
-#   --domains "example.com, www.example.com"
-#
-# # Use this command if no webserver is running. Certbot will launch its
-# # own webserver during the generation process.
-# certbot-auto certonly \
-#   --standalone \
-#   --agree-tos \
-#   --non-interactive \
-#   --text \
-#   --rsa-key-size 4096 \
-#   --email admin@example.com \
-#   --domains "example.com, www.example.com"
-
 class letsencrypt(
                     $manage_service        = true,
                     $manage_docker_service = true,
