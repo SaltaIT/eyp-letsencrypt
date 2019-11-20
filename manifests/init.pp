@@ -12,9 +12,6 @@ class letsencrypt(
                     $autorenew             = true,
                     $webroot               = '/var/lib/letsencrypt',
                   ) inherits letsencrypt::params {
-
-  validate_re($package_ensure, [ '^present$', '^installed$', '^absent$', '^purged$', '^held$', '^latest$' ], 'Not a supported package_ensure: present/absent/purged/held/latest')
-
   if(!$agree_tos)
   {
     fail('You must agree TOS to be able to proceed (ie set agree_tos to true)')
