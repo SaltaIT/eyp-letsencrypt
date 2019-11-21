@@ -5,4 +5,5 @@ class { 'letsencrypt':
 }
 
 letsencrypt::certificate { 'letstest.systemadmin.es':
+  webroot => '/var/lib/letsencrypt',
 }
