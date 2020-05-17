@@ -27,11 +27,24 @@
 #   --domains "example.com, www.example.com"
 
 define letsencrypt::certificate (
+<<<<<<< HEAD
                                   $domains = [ $name ],
                                   $renew_before_expiry_days = '30',
                                   $rsa_key_size = '4096',
                                 ) {
   #
+=======
+                                  $webroot,
+                                  $domains = [ $name ],
+                                  $rsa_key_size = '4096',
+                                ) {
+  include ::letsencrypt
+
+  Exec {
+    path => '/usr/sbin:/usr/bin:/sbin:/bin',
+  }
+
+>>>>>>> 1b14ac929e22f9e05be8f612c1a154f9bfcab550
   $conf_file = inline_template('/etc/letsencrypt/renewal/<%= @domains.first %>.conf')
   $cert_dir = inline_template('/etc/letsencrypt/live/<%= @domains.first %>')
 
@@ -42,6 +55,7 @@ define letsencrypt::certificate (
   $fullchain_file = inline_template('/etc/letsencrypt/live/<%= @domains.first %>/fullchain.pem')
   $archive_dir = inline_template('/etc/letsencrypt/archive/<%= @domains.first %>')
 
+<<<<<<< HEAD
   file { $cert_dir:
     ensure  => 'directory',
     owner   => 'root',
@@ -57,4 +71,27 @@ define letsencrypt::certificate (
     mode    => '0644',
     content => template("${module_name}/cert.erb")
   }
+=======
+  exec { "request certificate ${domains}":
+    command => inline_template('certbot certonly --webroot-path <%= @webroot %> --rsa-key-size <%= @rsa_key_size %> --domains "<%= @domains.join(',') %>"'),
+    creates => $cert_file,
+    require => Class['::letsencrypt'],
+  }
+
+  # file { $cert_dir:
+  #   ensure  => 'directory',
+  #   owner   => 'root',
+  #   group   => 'root',
+  #   mode    => '0755',
+  #   require => Class['::letsencrypt'],
+  # }
+  #
+  # file { $conf_file:
+  #   ensure  => 'present',
+  #   owner   => 'root',
+  #   group   => 'root',
+  #   mode    => '0644',
+  #   content => template("${module_name}/cert.erb")
+  # }
+>>>>>>> 1b14ac929e22f9e05be8f612c1a154f9bfcab550
 }
