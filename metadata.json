@@ -9,11 +9,7 @@
   "issues_url": "https://github.com/NTTCom-MS/eyp-letsencrypt/issues",
   "dependencies": [
     {"name":"puppetlabs/stdlib","version_requirement":">= 1.0.0 < 9.9.9"},
-<<<<<<< HEAD
-    {"name":"eyp/epel","version_requirement":">= 3.1.21 < 3.2.21"},
-=======
     {"name":"eyp/epel","version_requirement":">= 3.1.21 < 4.0.0"},
->>>>>>> 1b14ac929e22f9e05be8f612c1a154f9bfcab550
     {"name":"eyp/apt","version_requirement":">= 0.1.5 < 0.2.0"},
     {"name":"eyp/systemd","version_requirement":">= 0.2.13 < 0.3.0"},
     {"name":"eyp/eyplib","version_requirement":">= 0.1.0 < 0.2.0"}
