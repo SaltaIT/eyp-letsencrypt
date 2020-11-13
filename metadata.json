@@ -1,6 +1,6 @@
 {
   "name": "eyp-letsencrypt",
-  "version": "0.1.1",
+  "version": "1.0.1",
   "author": "Jordi Prats",
   "summary": "letsencrypt certificates management via certbot",
   "license": "Apache-2.0",
